@@ -1,4 +1,4 @@
-package com.ggar.dev.threadpoolexecutor.Singleton.memoizer;
+package com.ggar.dev.threadpoolexecutor.memoizer;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

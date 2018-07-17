@@ -1,7 +1,7 @@
-package com.ggar.dev.threadpoolexecutor.operation;
+package com.ggar.dev.test.threadpoolexecutor.multiply.implementations;
 
-import com.ggar.dev.threadpoolexecutor.Singleton.MultiplySingleton;
 import com.ggar.dev.threadpoolexecutor.Singleton.Singleton;
+import com.ggar.dev.threadpoolexecutor.operation.Operation;
 
 public class MultiplyOperation implements Operation<Integer> {
 		

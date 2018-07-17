@@ -1,16 +1,16 @@
-package com.ggar.dev.test.threadpoolexecutor;
+package com.ggar.dev.test.threadpoolexecutor.factorial;
 
 import java.util.Scanner;
 
-import com.ggar.dev.threadpoolexecutor.Singleton.FactorialSingleton;
+import com.ggar.dev.test.threadpoolexecutor.factorial.implementations.FactorialOperation;
+import com.ggar.dev.test.threadpoolexecutor.factorial.implementations.FactorialOperationPool;
+import com.ggar.dev.test.threadpoolexecutor.factorial.implementations.FactorialSingleton;
 import com.ggar.dev.threadpoolexecutor.executor.Executor;
 import com.ggar.dev.threadpoolexecutor.executor.GenericExecutor;
-import com.ggar.dev.threadpoolexecutor.operation.FactorialOperation;
 import com.ggar.dev.threadpoolexecutor.operation.Operation;
-import com.ggar.dev.threadpoolexecutor.pool.FactorialOperationPool;
 import com.ggar.dev.threadpoolexecutor.pool.Pool;
 
-public class FactorialMain {
+public class Factorial {
 	public static void main(String[] args) {
 		new FactorialSingleton();
 		Scanner sc = new Scanner(System.in);

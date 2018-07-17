@@ -1,4 +1,4 @@
-package com.ggar.dev.threadpoolexecutor.Singleton.memoizer;
+package com.ggar.dev.threadpoolexecutor.memoizer;
 
 public interface Memoizer<A, B> {
 	void set(A key, B value);

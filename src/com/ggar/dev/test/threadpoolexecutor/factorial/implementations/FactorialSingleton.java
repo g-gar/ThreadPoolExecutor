@@ -1,9 +1,9 @@
-package com.ggar.dev.threadpoolexecutor.Singleton;
+package com.ggar.dev.test.threadpoolexecutor.factorial.implementations;
 
 import java.math.BigInteger;
 
-import com.ggar.dev.threadpoolexecutor.Singleton.memoizer.FactorialMemoizer;
-import com.ggar.dev.threadpoolexecutor.Singleton.memoizer.Memoizer;
+import com.ggar.dev.threadpoolexecutor.Singleton.Singleton;
+import com.ggar.dev.threadpoolexecutor.memoizer.Memoizer;
 
 public class FactorialSingleton extends Singleton<Integer, BigInteger> {
 
@@ -35,6 +35,6 @@ public class FactorialSingleton extends Singleton<Integer, BigInteger> {
 		return computeFactorial(n, BigInteger.valueOf(1));
 	}
 	private BigInteger computeFactorial(Integer n, BigInteger accumulator) {
-		return n <= 1 ? accumulator : computeFactorial(n - 1, accumulator.multiply(BigInteger.valueOf(n)));
+		return memo.isComputed(n) ? memo.get(n) : (n <= 1 ? accumulator : computeFactorial(n - 1, accumulator.multiply(BigInteger.valueOf(n))));
 	}
 }

@@ -1,6 +1,6 @@
-package com.ggar.dev.threadpoolexecutor.pool;
+package com.ggar.dev.test.threadpoolexecutor.factorial.implementations;
 
-import com.ggar.dev.threadpoolexecutor.operation.FactorialOperation;
+import com.ggar.dev.threadpoolexecutor.pool.Pool;
 
 public class FactorialOperationPool extends Pool<FactorialOperation> {
 
