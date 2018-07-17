@@ -5,13 +5,14 @@ import java.util.Scanner;
 import com.ggar.dev.test.threadpoolexecutor.factorial.implementations.FactorialOperation;
 import com.ggar.dev.test.threadpoolexecutor.factorial.implementations.FactorialOperationPool;
 import com.ggar.dev.test.threadpoolexecutor.factorial.implementations.FactorialSingleton;
+import com.ggar.dev.threadpoolexecutor.Main;
 import com.ggar.dev.threadpoolexecutor.executor.Executor;
 import com.ggar.dev.threadpoolexecutor.executor.GenericExecutor;
 import com.ggar.dev.threadpoolexecutor.operation.Operation;
 import com.ggar.dev.threadpoolexecutor.pool.Pool;
 
-public class Factorial {
-	public static void main(String[] args) {
+public class Factorial implements Main  {
+	public void run() {
 		new FactorialSingleton();
 		Scanner sc = new Scanner(System.in);
 		Pool<FactorialOperation> pool = new FactorialOperationPool();

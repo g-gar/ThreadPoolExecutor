@@ -5,13 +5,14 @@ import java.util.Scanner;
 import com.ggar.dev.test.threadpoolexecutor.multiply.implementations.MultiplyOperation;
 import com.ggar.dev.test.threadpoolexecutor.multiply.implementations.MultiplyOperationPool;
 import com.ggar.dev.test.threadpoolexecutor.multiply.implementations.MultiplySingleton;
+import com.ggar.dev.threadpoolexecutor.Main;
 import com.ggar.dev.threadpoolexecutor.executor.Executor;
 import com.ggar.dev.threadpoolexecutor.executor.GenericExecutor;
 import com.ggar.dev.threadpoolexecutor.operation.Operation;
 import com.ggar.dev.threadpoolexecutor.pool.Pool;
 
-public class Multiply {
-	public static void main(String[] args) {
+public class Multiply implements Main {
+	public void run() {
 		new MultiplySingleton().configure(4);
 		Scanner sc = new Scanner(System.in);
 		Pool<MultiplyOperation> pool = new MultiplyOperationPool();
