@@ -1,6 +1,6 @@
-package com.ggar.dev.threadpoolexecutor.pool;
+package com.ggar.dev.test.threadpoolexecutor.multiply.implementations;
 
-import com.ggar.dev.threadpoolexecutor.operation.MultiplyOperation;
+import com.ggar.dev.threadpoolexecutor.pool.Pool;
 
 public class MultiplyOperationPool extends Pool<MultiplyOperation> {
 

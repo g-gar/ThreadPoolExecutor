@@ -8,7 +8,9 @@ public abstract class Singleton<A, T> {
 		return Singleton.INSTANCE;
 	}
 	
-	protected abstract void configure();
+	protected void configure(Singleton singleton) {
+		INSTANCE = singleton;
+	}
 	
 	public abstract T du(A value);
 

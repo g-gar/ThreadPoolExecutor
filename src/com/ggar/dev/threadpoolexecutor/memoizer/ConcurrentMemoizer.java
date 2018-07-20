@@ -1,4 +1,4 @@
-package com.ggar.dev.threadpoolexecutor.Singleton.memoizer;
+package com.ggar.dev.threadpoolexecutor.memoizer;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,6 +24,6 @@ public abstract class ConcurrentMemoizer<A, B> implements Memoizer<A, B> {
 
 	@Override
 	public boolean isComputed(A key) {
-		return memo.containsKey(key);
+		return memo.containsKey(key) && !memo.get(key).equals(null);
 	}
 }

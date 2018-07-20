@@ -1,5 +1,6 @@
 package com.ggar.dev.threadpoolexecutor.executor;
 
+import com.ggar.dev.threadpoolexecutor.operation.Operation;
 import com.ggar.dev.threadpoolexecutor.pool.Pool;
 
 public class GenericExecutor<A> implements Executor<A> {
@@ -8,31 +9,20 @@ public class GenericExecutor<A> implements Executor<A> {
 	private Pool<A> pool;
 	private Thread runner;
 	
-	public GenericExecutor(Pool p) { 
-		this.pool = p;
-		this.runner = new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				while (true) {
-					try {
-						Runnable r = (Runnable) pool.get();
-						if (!r.equals(null)) {
-							new Thread(r).run();
-							Thread.sleep(1000);
-						}
-					} catch (Exception e) {
-						
-					}
-				}
-			}
-		});
+	public GenericExecutor() {
+		setPool(null);
+	};
+	
+	public GenericExecutor(Pool<A> p) { 
+		setPool(p);
 	}
 	
 	@Override
 	public void start() throws Exception {
-		this.runner.start();
-		this.state = ExecutorState.RUNNING;
+		if (!pool.equals(null)) {
+			this.runner.start();
+			this.state = ExecutorState.RUNNING;
+		} else throw new Exception("Pool not found");
 	}
 
 	@Override
@@ -45,5 +35,28 @@ public class GenericExecutor<A> implements Executor<A> {
 	public ExecutorState getState() {
 		return state;
 	}
+
+	@Override
+	public void setPool(Pool p) {
+		this.runner = setRunner(this.pool = p);
+	}
 	
+	private Thread setRunner(Pool p) {
+		return new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						while (true) {
+							try {
+								A r = GenericExecutor.this.pool.get();
+								if (r!= null && !r.equals(null)) {
+									((Runnable) r).run();
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
+					}
+				});
+	}
 }
