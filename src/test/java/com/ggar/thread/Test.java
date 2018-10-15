@@ -1,12 +1,22 @@
 package com.ggar.thread;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.apache.log4j.Logger;
+
+import com.ggar.framework.model.Counter;
+import com.ggar.thread.model.Priority;
+import com.ggar.thread.model.Task;
+import com.ggar.thread.model.processor.PrintLnProcessor;
+import com.ggar.thread.model.task.DoubleValueTask;
+import com.ggar.thread.model.task.TestTask;
+import com.ggar.thread.util.Processors;
+
 public class Test {
+	
+	private final static Logger LOG = Logger.getLogger(Test.class);
 
 	public static void main(String[] args) {
 		
@@ -14,52 +24,33 @@ public class Test {
 		Processors.register(TestTask.class, new PrintLnProcessor());
 		
 		int num = Runtime.getRuntime().availableProcessors();
-		System.out.println("ThreadPool size" + num);
+		LOG.debug("ThreadPool size " + num);
 		final ThreadPool pool = new ThreadPool();
 		ThreadPoolExecutor executor = new ThreadPoolExecutor(num, pool);
 		
-		executor.start();
-		
-		final Counter counter = new Counter(0);
-		Timer t = new Timer();
-		TimerTask tt = new TimerTask() {
-			
+		final Counter counter = new Counter(0);		
+		Thread another = new Thread(new Runnable() {
+
 			@Override
 			public void run() {
-				Priority[] priorities = Priority.values();
-				Random random = new Random();
-				
-				Task task = new DoubleValueTask(counter.get());
-				Integer index = random.nextInt(priorities.length);
-				
-				pool.add(task, priorities[index]);
-				System.out.println("Added task" + task + ", with priority [" + priorities[index] + "]");
-				counter.increment();
+				synchronized (counter) {
+					while(counter.get() < 100) {
+						Priority[] priorities = Priority.values();
+						Random random = new Random();
+						
+						Task task = new DoubleValueTask(counter.get());
+						Integer index = random.nextInt(priorities.length);
+						
+						pool.add(task, priorities[index]);
+						LOG.debug("Added task" + task + ", with priority [" + priorities[index] + "]");
+						counter.increment();
+					}
+				}
 			}
-			
-		};
-		t.schedule(tt, 0, 1000);
+		});
+		
+		executor.start();
+		another.start();
 	}
 	
-}
- class Counter {
-	private Integer counter;
-	
-	public Counter(Integer initial) {
-		super();
-		this.counter = initial;
-	}
-
-	public Integer get() {
-		return this.counter;
-	}
-	
-	public Integer increment() {
-		return this.increment(1);
-	}
-	
-	public Integer increment(Integer value) {
-		this.counter += value;
-		return counter;
-	}
 }

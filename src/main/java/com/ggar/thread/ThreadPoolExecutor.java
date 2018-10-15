@@ -1,39 +1,37 @@
 package com.ggar.thread;
 
+import org.apache.log4j.Logger;
+
+import com.ggar.thread.model.Processor;
+import com.ggar.thread.model.Task;
+import com.ggar.thread.util.Processors;
+
 public class ThreadPoolExecutor extends Thread {
 
-	private final Thread[] threads;
+	private final static Logger LOG = Logger.getLogger(ThreadPoolExecutor.class);
 	private final ThreadPool pool;
 	
+	public ThreadPoolExecutor(ThreadPool pool) {
+		this(Runtime.getRuntime().availableProcessors(), pool);
+	}
+
 	public ThreadPoolExecutor(Integer nThreads, ThreadPool pool) {
-		//int numCores = Runtime.getRuntime().availableProcessors();
-		this.threads = new Thread[nThreads];
 		this.pool = pool;
 	}
 
 	@Override
 	public void run() {
-		System.out.println(1);
-		synchronized(this) {
-			System.out.println(2);
-			while (true) {
-				Task<?> task = null;
-				Processor<Task, ?> processor = null;
-				
-				if ((task = this.pool.pop()) != null) {
-					System.out.println(task);
-					
-					if (((processor = Processors.findByTask(task)) != null)) {
-						System.out.println(processor);
-					}
-				}
-				
-				if (task != null && processor != null) {
+		while (true) {
+			Task<?> task = null;
+			Processor<Task, ?> processor = null;
+
+			if ((task = this.pool.pop()) != null) {
+
+				if (((processor = Processors.findByTask(task)) != null)) {
 					processor.execute(task);
 				}
-				pool.notify();
 			}
 		}
+
 	}
-	
 }

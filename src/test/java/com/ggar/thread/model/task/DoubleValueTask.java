@@ -1,4 +1,6 @@
-package com.ggar.thread;
+package com.ggar.thread.model.task;
+
+import com.ggar.thread.model.Task;
 
 public class DoubleValueTask implements Task<Integer> {
 	

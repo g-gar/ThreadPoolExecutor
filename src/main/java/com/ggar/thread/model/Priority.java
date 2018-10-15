@@ -1,4 +1,4 @@
-package com.ggar.thread;
+package com.ggar.thread.model;
 
 public enum Priority {
 

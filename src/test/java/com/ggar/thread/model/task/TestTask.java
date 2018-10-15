@@ -1,4 +1,6 @@
-package com.ggar.thread;
+package com.ggar.thread.model.task;
+
+import com.ggar.thread.model.Task;
 
 public class TestTask implements Task<String> {
 	
@@ -8,7 +10,6 @@ public class TestTask implements Task<String> {
 		this.string = string;
 	}
 
-	@Override
 	public String execute() {
 		return this.string;
 	}

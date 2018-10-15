@@ -1,4 +1,4 @@
-package com.ggar.thread;
+package com.ggar.thread.model;
 
 public interface Processor<E extends Task<?>, R> {
 	
