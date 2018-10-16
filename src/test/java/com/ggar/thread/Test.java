@@ -4,6 +4,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
 import com.ggar.framework.model.Counter;
@@ -19,6 +20,8 @@ public class Test {
 	private final static Logger LOG = Logger.getLogger(Test.class);
 
 	public static void main(String[] args) {
+		
+		BasicConfigurator.configure();
 		
 		Processors.register(DoubleValueTask.class, new PrintLnProcessor());
 		Processors.register(TestTask.class, new PrintLnProcessor());

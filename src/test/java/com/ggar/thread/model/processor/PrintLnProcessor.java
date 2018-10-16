@@ -7,7 +7,8 @@ public class PrintLnProcessor implements Processor<Task, Void> {
 
 	@Override
 	public Void execute(Task task) {
-		System.out.println("Executed task " + task + " with value: " + task.execute().toString());
+		String name = Thread.currentThread().getName();
+		System.out.println(name + ": Executed task " + task + " with value: " + task.execute().toString());
 		return null;
 	}
 
