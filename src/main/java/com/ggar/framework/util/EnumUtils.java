@@ -15,10 +15,11 @@ public class EnumUtils {
 		Arrays.sort(values, comparator);
 		
 		R result = null;
+		out:
 		for (E value : values) {
 			result = function.apply(value);
 			if (result != null) {
-				break;
+				break out;
 			}
 		}
 		
